@@ -56,3 +56,4 @@ $ yarn add reactstrap
 - As a developer, I can add react-router-dom@5.3.0 to my application.
 - As a developer, I can add routes to be able to navigate manually to all pages.
 - As a developer, I can add some styling to the Home component.
+- Add Enzyme to your application
