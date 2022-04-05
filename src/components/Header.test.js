@@ -8,19 +8,14 @@ import Enzyme, { shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 // Imports in the component we are going to be testing.
-import Home from './Home.js'
+import Header from './Header.js'
 
 Enzyme.configure({ adapter: new Adapter() })
 
-describe("When Home Renders", () => {
-  it("displays a heading", () => {
-    const renderedHome = shallow(<Home />)
-    const homeHeading = renderedHome.find("h3")
-    expect(homeHeading.text()).toEqual('Welcome to Cat Tinder!')
-  })
-  it("displays an image", () => {
-    const renderedHome = shallow(<Home />)
-    const homeImage = renderedHome.find("img")
-    expect(homeImage.length).toEqual(1)
+describe("When Header Renders", () => {
+  it("displays a Navlink", () => {
+    const renderedHeader = shallow(<Header />)
+    const headerNavLinks = renderedHeader.find("NavLink")
+    expect(headerNavLinks.length).toEqual(3)
   })
 })

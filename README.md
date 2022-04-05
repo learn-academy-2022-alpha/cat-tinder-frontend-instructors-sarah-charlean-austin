@@ -36,6 +36,7 @@ As a developer, I can create a file called Footer.js in the components directory
 - As a developer, I can create a file called Home.js in the pages directory.
 - As a developer, I can create a file called CatIndex.js in the pages directory.
 
+
 ```
 $ yarn add bootstrap
 $ yarn add reactstrap
@@ -56,4 +57,28 @@ $ yarn add reactstrap
 - As a developer, I can add react-router-dom@5.3.0 to my application.
 - As a developer, I can add routes to be able to navigate manually to all pages.
 - As a developer, I can add some styling to the Home component.
+
+# Testing with Jest and Enzyme
 - Add Enzyme to your application
+  `$ yarn add -D enzyme react-test-renderer enzyme-adapter-react-16`
+
+```javascript
+// Imports React into our test file.
+import React from 'react'
+
+// Imports Enzyme testing and deconstructs Shallow into our test file.
+import Enzyme, { shallow } from 'enzyme'
+
+// Imports Adapter utilizing the latest react version into our test file so we can run a testing render on any component we may need.
+import Adapter from 'enzyme-adapter-react-16'
+
+// Imports in the component we are going to be testing.
+import Home from './Home.js'
+```
+
+- Configure Enzyme
+  `Enzyme.configure({ adapter: new Adapter() })`
+
+- Add a test file for the Home, Header, Footer, and NotFound components with the .test.js extension.
+
+- Create a test for each page, checking that the page is rendering by asserting against a single JSX element.
