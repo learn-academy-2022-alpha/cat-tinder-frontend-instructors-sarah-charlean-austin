@@ -23,7 +23,6 @@ class App extends Component {
     }
   }
   render() {
-    console.log(this.state.cats);
     return (
       <Router>
         <Header />
@@ -35,7 +34,7 @@ class App extends Component {
           <Route path="/catshow" component={CatShow} />
           <Route path="/catedit" component={CatEdit} />
           <Route path="/catnew" component={CatNew} />
-          <Route component={NotFound}/>
+          <Route component={NotFound} />
         </Switch>
         <Footer />
       </Router>
