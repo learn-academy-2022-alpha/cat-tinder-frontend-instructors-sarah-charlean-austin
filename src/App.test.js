@@ -25,7 +25,7 @@ describe("When App renders", () => {
     const renderedFooter = app.find("Footer")
     expect(renderedFooter.length).toEqual(1)
   })
-  it("provides a route for the home component",()=>{
+  it("provides a route for the home component",() => {
 
     const renderedHomeRoute = app.find('[path="/"]')
     expect(renderedHomeRoute.length).toEqual(1)
