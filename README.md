@@ -82,3 +82,18 @@ import Home from './Home.js'
 - Add a test file for the Home, Header, Footer, and NotFound components with the .test.js extension.
 
 - Create a test for each page, checking that the page is rendering by asserting against a single JSX element.
+
+```javascript
+describe("When Home Renders", () => {
+  it("displays a heading", () => {
+    const renderedHome = shallow(<Home />)
+    const homeHeading = renderedHome.find("h3")
+    expect(homeHeading.text()).toEqual('Welcome to Cat Tinder!')
+  })
+})
+```
+
+- As a developer, I can make my tests more DRY by declaring reusable variables in global scope.
+- Create an additional test for the component Home.js that checks for the first img tag and all of its props.
+- Create an additional test for the component Header.js that checks for a tag by its class name to contain some text.
+
