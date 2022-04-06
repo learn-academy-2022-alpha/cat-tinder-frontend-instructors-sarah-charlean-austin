@@ -1,5 +1,5 @@
 # Cat Tinder Alpha 4/4/22
-## Trello 
+## Trello
 - Kanban board for agile development
 - Allows us to keep track of Product Goals including
   - Minimum Viable Product (MVP)
@@ -97,3 +97,18 @@ describe("When Home Renders", () => {
 - Create an additional test for the component Home.js that checks for the first img tag and all of its props.
 - Create an additional test for the component Header.js that checks for a tag by its class name to contain some text.
 
+
+### Cat Tinder Read 4/6/2022
+
+RESTful Routes
+Data
+- index - all the stuff
+- show - one thing, which thing is going to show, id
+- create
+- destroy
+- update
+User
+- edit
+- new
+
+Static vs dynamic routes

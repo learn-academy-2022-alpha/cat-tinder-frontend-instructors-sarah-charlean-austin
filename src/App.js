@@ -19,19 +19,29 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      cats : mockCats
+      cats: mockCats
     }
   }
   render() {
-    return (
+    return(
       <Router>
         <Header />
-        <h1>Hello World</h1>
-        <h2>Cat Tinder in Development</h2>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/catindex" component={CatIndex} />
-          <Route path="/catshow" component={CatShow} />
+          <Route
+            path="/catindex"
+            render={(props) => <CatIndex cats={this.state.cats} /> }
+          />
+
+          <Route
+            path="/catshow/:id"
+            render={(props) => {
+              let id = props.match.params.id
+              let cat = this.state.cats.find(catObj => catObj.id === +id)
+              return <CatShow cat={cat} />
+            }}
+          />
+
           <Route path="/catedit" component={CatEdit} />
           <Route path="/catnew" component={CatNew} />
           <Route component={NotFound} />
