@@ -22,6 +22,11 @@ class App extends Component {
       cats: mockCats
     }
   }
+
+  createCat = (newCat) => {
+    console.log("Cat was created", newCat)
+  }
+
   render() {
     return(
       <Router>
@@ -43,7 +48,12 @@ class App extends Component {
           />
 
           <Route path="/catedit" component={CatEdit} />
-          <Route path="/catnew" component={CatNew} />
+
+          <Route 
+            path="/catnew"
+            render={(props) => < CatNew createCat={this.createCat} />}  
+          />
+
           <Route component={NotFound} />
         </Switch>
         <Footer />
