@@ -112,3 +112,174 @@ User
 - new
 
 Static vs dynamic routes
+
+### Cat Tinder Create 4/6/2022
+
+#### The work flow --- Create a test that will verify that the CatNew page has a form and a heading.
+
+Trello---As a developer, I have test coverage on my new page.
+- Bring in test dependencies from jest enzyme
+- write test 
+``` javascript
+describe("When CatNew Renders", () => {
+  it("displays a heading", () => {
+    const renderedCatNew = shallow(<CatNew />)
+    const catNewHeading = renderedCatNew.find("h2")
+    expect(catNewHeading.text()).toEqual('Welcome to the Meow Mixer')
+  })
+  it("displays a form", () => {
+    const renderedCatNew = shallow(<CatNew />)
+    const catNewForm = renderedCatNew.find("Form")
+    expect(catNewForm.length).toEqual(1)
+  })
+})
+```
+- $ yarn test
+- Good failure if all tests appear.
+
+#### The work flow --- Add a form and a heading on the CatNew page.
+Trello---As a user, I can fill out a form to add a new cat.
+- copy code for form and button from reactstrap.github.io
+```javascript
+<Form>
+  <FormGroup>
+    <Label for="exampleEmail">
+      Email
+    </Label>
+    <Input
+      id="exampleEmail"
+      name="email"
+      placeholder="with a placeholder"
+      type="email"
+    />
+  </FormGroup>
+    <Button>
+    Submit
+  </Button>
+</Form>
+```
+- import all the tags from Reactstrap
+```javascript
+  import { Form, FormGroup, Label, Input, Button } from 'reactstrap'
+```
+
+- Update the form to reflect the input fields for cat's name, age, enjoys, image
+- Add the h2 heading as shown on the test
+- Remove id attribute
+```javascript
+  <Form>
+    <h2>Welcome to the Meow Mixer</h2>
+    <FormGroup>
+      <Label for="name">
+        Cat's Name
+      </Label>
+      <Input
+        name="name"
+        placeholder="What's your cat's name?"
+        type="text"
+      />
+    </FormGroup>
+      <Button>
+        Submit
+      </Button>
+  </Form>
+```
+
+- Verify the tests passed
+- Ctrl + C to stop the tests from auto-running
+- A form with the 4 input fields should appear on the CatNew page in the browser
+
+#### The work flow --- Transform CatNew page into a logic component.
+Trello---As a developer, I can store the cat object in state
+- Constructor method with a state object under the class component. We will also include a nested object that will store the input data for our cats
+```javascript
+  constructor(props){
+    super(props)
+    this.state = {
+      form: {
+        name: "",
+        age: "",
+        enjoys: "",
+        image: ""
+      }
+    }
+  }
+```
+- Collect info with a custom function and event listener. The function will initially just print out the event object produced by the event listener
+```javascript
+handleChange = (e) => { 
+  console.log(e)
+}
+```
+Each input will receive an event listener.
+```javascript
+  <Input
+    name="age"
+    placeholder="How long has your cat been purring?"
+    type="number"
+    onChange={this.handleChange}
+  />
+```
+
+- update the handleChange() to reflect the e.target.name and e.target.value
+
+- update handleChange() to change the appropriate keys in state with destructuring the form object from state, dynamically sharing the key:value pairs, 
+  ```javascript
+  handleChange = (e) => {
+    let { form } = this.state
+    form[e.target.name] = e.target.value
+    this.setState({form: form})
+  }
+  ```
+
+- Add a value attribute to the input field to ensure what the user types is showig visually on the form
+```javascript
+  <Input
+    name="age"
+    placeholder="How long has your cat been purring?"
+    type="number"
+    onChange={this.handleChange}
+    value={this.state.form.age}
+  />
+```
+
+#### The work flow --- Pass info to App.js
+Trello---As a developer, I can pass the cat object to App.js on submit and see the cat object logged in the console.
+- Create a function on App.js that takes in an argument and prints that out.
+```javascript
+  createCat = (newCat) => {
+    console.log("Cat has been created", newCat)
+  }
+```
+- Make function available to child component
+```javascript
+  <Route
+    path="/catnew"
+    render={(props) => <CatNew createCat={this.createCat} />}
+  />
+```
+- Access the createCat() in CatNew.js by creating a function that calls upon createCat() and passes the nested object form 
+```javascript 
+handleSubmit = () => {
+  this.props.createCat(this.state.form)
+}
+```
+- Update the submit button to trigger the handleSubmit()
+```javascript
+  <Button onClick={this.handleSubmit} name='submit'>
+    Add a Cat
+  </Button> 
+```
+
+#### The work flow --- Redirect CatNew page to the CatIndex page after submitting cat info
+Trello---As a user, I can be routed to the index page after I submit the new cat form.
+- react-router import
+```javascript
+import { Redirect } from 'react-router-dom'
+```
+- Set the condition to be met that will allow a redirect. Initial state ---> submitted: false 
+- Use handleSubmit() to update submitted to true when a submission is made
+- JavaScript code at the bottom of the JSX that will redirect when submitted is true
+```javascript
+{this.state.submitted && <Redirect to="/catindex" />}
+```
