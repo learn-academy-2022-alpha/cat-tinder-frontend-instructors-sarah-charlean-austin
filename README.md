@@ -271,9 +271,15 @@ handleSubmit = () => {
   </Button> 
 ```
 
-#### The work flow --- Redirect to the CatIndex page after submitting cat info
+#### The work flow --- Redirect CatNew page to the CatIndex page after submitting cat info
 Trello---As a user, I can be routed to the index page after I submit the new cat form.
-- import Redirect from react-router-dom
+- react-router import
+```javascript
+import { Redirect } from 'react-router-dom'
+```
 - Set the condition to be met that will allow a redirect. Initial state ---> submitted: false 
 - Use handleSubmit() to update submitted to true when a submission is made
-
+- JavaScript code at the bottom of the JSX that will redirect when submitted is true
+```javascript
+{this.state.submitted && <Redirect to="/catindex" />}
+```
